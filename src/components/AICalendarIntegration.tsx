@@ -102,7 +102,12 @@ Respond with JSON:
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="e.g., 'Team meeting tomorrow at 3pm for 1 hour'"
-                className="flex-1 bg-black/50 border border-cyan-600/30 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500"
+                className="flex-1 rounded px-3 py-2 text-sm focus:outline-none"
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  border: '1px solid var(--border-color)',
+                  color: 'var(--text-primary)'
+                }}
                 onKeyPress={(e) => e.key === 'Enter' && handleSmartAdd()}
               />
               <NeonButton onClick={handleSmartAdd} color="cyan" disabled={isProcessing || !prompt.trim()}>
@@ -128,8 +133,8 @@ Respond with JSON:
                 </HolographicText>
                 <ul className="space-y-1">
                   {suggestions.map((suggestion, i) => (
-                    <li key={i} className="text-xs text-gray-300 flex items-start gap-2">
-                      <span className="text-purple-400 mt-0.5">•</span>
+                    <li key={i} className="text-xs flex items-start gap-2" style={{ color: 'var(--text-primary)' }}>
+                      <span style={{ color: 'var(--accent-magenta)' }} className="mt-0.5">•</span>
                       <span>{suggestion}</span>
                     </li>
                   ))}

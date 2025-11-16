@@ -168,20 +168,24 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({
             <SectionHeader icon={ShieldCheck} title="SUBSCRIPTION" />
             <div className="flex items-center justify-between">
                 <div>
-                    <span className="text-gray-300">Status</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>Status</span>
                     {isSubscribed ? (
                         <>
-                            <p className="text-lg font-bold text-green-400">Active</p>
-                            <p className="text-xs text-gray-400">Plan: <span className="capitalize">{currentUser?.subscription.plan}</span></p>
-                            <p className="text-xs text-gray-400">Expires on {new Date(currentUser?.subscription.expiresAt!).toLocaleDateString()}</p>
+                            <p className="text-lg font-bold" style={{ color: 'var(--accent-green)' }}>Active</p>
+                            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Plan: <span className="capitalize">{currentUser?.subscription.plan}</span></p>
+                            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Expires on {new Date(currentUser?.subscription.expiresAt!).toLocaleDateString()}</p>
                         </>
                     ) : (
-                        <p className="text-lg font-bold text-red-400">Expired</p>
+                        <p className="text-lg font-bold" style={{ color: '#ff0055' }}>Expired</p>
                     )}
                 </div>
                 <button
                     onClick={() => setShowSubscriptionModal(true)}
-                    className="px-4 py-2 bg-cyan-600 text-white font-semibold rounded-md hover:bg-cyan-700 transition-colors flex items-center gap-2"
+                    className="px-4 py-2 font-semibold rounded-md transition-colors flex items-center gap-2"
+                    style={{
+                      backgroundColor: 'var(--accent-cyan)',
+                      color: 'white'
+                    }}
                 >
                     Manage
                 </button>
@@ -204,9 +208,30 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({
                             </div>
                             <div className="flex items-center gap-1">
                                 {wf.trigger.type !== 'manual' && <Toggle checked={wf.isEnabled ?? false} onChange={(e) => onToggleWorkflow(wf.id, e.target.checked)} ariaLabel="Toggle Workflow Automation" />}
-                                <button onClick={() => onRunWorkflow(wf.id)} title="Run Workflow" className="p-2 text-green-400 hover:bg-green-900/50 rounded-full"><Play size={16} /></button>
-                                <button onClick={() => onOpenWorkflowEditor(wf)} title="Edit Workflow" className="p-2 text-gray-400 hover:bg-gray-700/50 rounded-full"><ChevronsRight size={16} /></button>
-                                <button onClick={() => onDeleteWorkflow(wf.id)} title="Delete Workflow" className="p-2 text-red-500 hover:bg-red-900/50 rounded-full"><Trash2 size={16} /></button>
+                                <button 
+                                  onClick={() => onRunWorkflow(wf.id)} 
+                                  title="Run Workflow" 
+                                  className="p-2 rounded-full transition-colors"
+                                  style={{ color: 'var(--accent-green)' }}
+                                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 255, 0, 0.2)'}
+                                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                ><Play size={16} /></button>
+                                <button 
+                                  onClick={() => onOpenWorkflowEditor(wf)} 
+                                  title="Edit Workflow" 
+                                  className="p-2 rounded-full transition-colors"
+                                  style={{ color: 'var(--text-secondary)' }}
+                                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(160, 160, 192, 0.2)'}
+                                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                ><ChevronsRight size={16} /></button>
+                                <button 
+                                  onClick={() => onDeleteWorkflow(wf.id)} 
+                                  title="Delete Workflow" 
+                                  className="p-2 rounded-full transition-colors"
+                                  style={{ color: '#ff0055' }}
+                                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 0, 85, 0.2)'}
+                                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                ><Trash2 size={16} /></button>
                             </div>
                         </div>
                     </div>

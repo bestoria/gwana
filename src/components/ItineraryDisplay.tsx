@@ -8,11 +8,11 @@ interface ItineraryDisplayProps {
 
 const ActivityIcon: React.FC<{ type: ItineraryActivity['type'] }> = ({ type }) => {
     switch (type) {
-        case 'travel': return <Plane size={16} className="text-blue-400" />;
-        case 'dining': return <Utensils size={16} className="text-orange-400" />;
-        case 'lodging': return <Bed size={16} className="text-purple-400" />;
-        case 'activity': return <MapPin size={16} className="text-green-400" />;
-        default: return <MapPin size={16} className="text-gray-400" />;
+        case 'travel': return <Plane size={16} style={{ color: 'var(--accent-cyan)' }} />;
+        case 'dining': return <Utensils size={16} style={{ color: 'var(--accent-amber)' }} />;
+        case 'lodging': return <Bed size={16} style={{ color: 'var(--accent-magenta)' }} />;
+        case 'activity': return <MapPin size={16} style={{ color: 'var(--accent-green)' }} />;
+        default: return <MapPin size={16} style={{ color: 'var(--text-secondary)' }} />;
     }
 };
 

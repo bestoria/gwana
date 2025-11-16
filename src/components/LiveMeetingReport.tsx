@@ -58,16 +58,16 @@ const LiveMeetingReport: React.FC<LiveMeetingReportProps> = ({ data }) => {
   useEffect(() => { interpretationRef.current?.scrollTo(0, interpretationRef.current.scrollHeight); }, [englishInterpretation]);
   
   const sentimentIndicator = useMemo(() => {
-    let color = 'bg-gray-500';
+    let color = 'var(--text-secondary)';
     let title = 'Neutral Sentiment';
     if (liveSentiment === 'positive') {
-      color = 'bg-green-500';
+      color = 'var(--accent-green)';
       title = 'Positive Sentiment';
     } else if (liveSentiment === 'negative') {
-      color = 'bg-red-500';
+      color = '#ff0055';
       title = 'Negative Sentiment';
     }
-    return <div title={title} className={`w-3 h-3 rounded-full ${color} transition-colors duration-500 animate-pulse`} />;
+    return <div title={title} className="w-3 h-3 rounded-full transition-colors duration-500 animate-pulse" style={{ backgroundColor: color }} />;
   }, [liveSentiment]);
 
   const TabButton: React.FC<{ tabId: typeof activeTab; icon: React.ElementType; label: string }> = ({ tabId, icon: Icon, label }) => (

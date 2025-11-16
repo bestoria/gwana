@@ -14,11 +14,11 @@ interface GridItemProps {
 }
 
 const GridItem: React.FC<GridItemProps> = ({ title, items, icon: Icon, colorClass }) => (
-    <div className={`bg-black/40 p-3 rounded-md border border-gray-700`}>
-        <h4 className={`text-sm font-semibold mb-2 flex items-center gap-2 ${colorClass}`}>
+    <div className="p-3 rounded-md" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(160, 160, 192, 0.3)' }}>
+        <h4 className="text-sm font-semibold mb-2 flex items-center gap-2" style={{ color: colorClass }}>
             <Icon size={16} /> {title}
         </h4>
-        <ul className="list-disc list-inside space-y-1 text-gray-300 text-sm">
+        <ul className="list-disc list-inside space-y-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
             {items.map((item, index) => <li key={index}>{item}</li>)}
         </ul>
     </div>
@@ -39,10 +39,10 @@ const SWOTDisplay: React.FC<SWOTDisplayProps> = ({ swot }) => {
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <GridItem title="Strengths" items={swot.strengths} icon={Zap} colorClass="text-green-400" />
-                <GridItem title="Weaknesses" items={swot.weaknesses} icon={ShieldOff} colorClass="text-red-400" />
-                <GridItem title="Opportunities" items={swot.opportunities} icon={Lightbulb} colorClass="text-yellow-400" />
-                <GridItem title="Threats" items={swot.threats} icon={TrendingUp} colorClass="text-orange-400" />
+                <GridItem title="Strengths" items={swot.strengths} icon={Zap} colorClass="var(--accent-green)" />
+                <GridItem title="Weaknesses" items={swot.weaknesses} icon={ShieldOff} colorClass="#ff0055" />
+                <GridItem title="Opportunities" items={swot.opportunities} icon={Lightbulb} colorClass="var(--accent-amber)" />
+                <GridItem title="Threats" items={swot.threats} icon={TrendingUp} colorClass="var(--accent-magenta)" />
             </div>
         </div>
     );

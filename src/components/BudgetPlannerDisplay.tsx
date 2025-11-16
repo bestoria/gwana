@@ -10,7 +10,7 @@ const BudgetPlannerDisplay: React.FC<BudgetPlannerDisplayProps> = ({ budget }) =
     if (!budget) return null;
 
     const { summary, incomeSources, expenseCategories } = budget;
-    const netBalanceColor = summary.netBalance >= 0 ? 'text-green-400' : 'text-red-400';
+    const netBalanceColor = summary.netBalance >= 0 ? 'var(--accent-green)' : '#ff0055';
 
     return (
         <div className="mt-2 p-3 border border-cyan-500/50 bg-black/30 rounded-lg font-mono text-xs max-w-xl relative">
@@ -24,18 +24,21 @@ const BudgetPlannerDisplay: React.FC<BudgetPlannerDisplayProps> = ({ budget }) =
             </h3>
 
             {/* Summary Section */}
-            <div className="grid grid-cols-3 gap-2 text-center bg-black/40 p-3 rounded-md border border-gray-700 mb-4">
+            <div className="grid grid-cols-3 gap-2 text-center p-3 rounded-md mb-4" style={{ 
+              backgroundColor: 'rgba(0, 0, 0, 0.4)', 
+              border: '1px solid rgba(160, 160, 192, 0.3)' 
+            }}>
                 <div>
-                    <p className="text-sm text-green-400">Income</p>
-                    <p className="text-lg font-bold text-white">₦{summary.totalIncome.toLocaleString()}</p>
+                    <p className="text-sm" style={{ color: 'var(--accent-green)' }}>Income</p>
+                    <p className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>₦{summary.totalIncome.toLocaleString()}</p>
                 </div>
                 <div>
-                    <p className="text-sm text-red-400">Expenses</p>
-                    <p className="text-lg font-bold text-white">₦{summary.totalExpenses.toLocaleString()}</p>
+                    <p className="text-sm" style={{ color: '#ff0055' }}>Expenses</p>
+                    <p className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>₦{summary.totalExpenses.toLocaleString()}</p>
                 </div>
                 <div>
-                    <p className="text-sm text-cyan-400">Net Balance</p>
-                    <p className={`text-lg font-bold ${netBalanceColor}`}>₦{summary.netBalance.toLocaleString()}</p>
+                    <p className="text-sm" style={{ color: 'var(--accent-cyan)' }}>Net Balance</p>
+                    <p className="text-lg font-bold" style={{ color: netBalanceColor }}>₦{summary.netBalance.toLocaleString()}</p>
                 </div>
             </div>
 
@@ -46,9 +49,9 @@ const BudgetPlannerDisplay: React.FC<BudgetPlannerDisplayProps> = ({ budget }) =
                     <h4 className="text-sm font-semibold text-cyan-400 mb-2 flex items-center gap-2"><TrendingUp size={16} /> Income Sources</h4>
                     <div className="space-y-1 text-sm">
                         {incomeSources.map((source, index) => (
-                            <div key={index} className="flex justify-between p-2 bg-black/20 rounded">
-                                <span className="text-gray-300">{source.source}</span>
-                                <span className="font-semibold text-green-300">+₦{source.amount.toLocaleString()}</span>
+                            <div key={index} className="flex justify-between p-2 rounded" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+                                <span style={{ color: 'var(--text-secondary)' }}>{source.source}</span>
+                                <span className="font-semibold" style={{ color: 'var(--accent-green)' }}>+₦{source.amount.toLocaleString()}</span>
                             </div>
                         ))}
                     </div>
@@ -59,12 +62,12 @@ const BudgetPlannerDisplay: React.FC<BudgetPlannerDisplayProps> = ({ budget }) =
                     <h4 className="text-sm font-semibold text-cyan-400 mb-2 flex items-center gap-2"><TrendingDown size={16} /> Expense Categories</h4>
                     <div className="space-y-2 text-sm">
                         {expenseCategories.map((cat, index) => (
-                            <details key={index} className="bg-black/20 rounded p-2">
+                            <details key={index} className="rounded p-2" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
                                 <summary className="cursor-pointer flex justify-between">
-                                    <span className="text-gray-300">{cat.category}</span>
-                                    <span className="font-semibold text-red-300">-₦{cat.allocated.toLocaleString()}</span>
+                                    <span style={{ color: 'var(--text-secondary)' }}>{cat.category}</span>
+                                    <span className="font-semibold" style={{ color: '#ff0055' }}>-₦{cat.allocated.toLocaleString()}</span>
                                 </summary>
-                                <ul className="mt-2 pl-6 list-disc text-xs text-gray-400 space-y-1">
+                                <ul className="mt-2 pl-6 list-disc text-xs space-y-1" style={{ color: 'var(--text-secondary)' }}>
                                     {cat.items.map((item, itemIndex) => <li key={itemIndex}>{item}</li>)}
                                 </ul>
                             </details>

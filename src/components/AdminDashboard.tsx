@@ -99,18 +99,28 @@ const AdminDashboard: React.FC = () => {
                                         </div>
                                     </td>
                                     <td className="p-3">
-                                        <div className={`flex items-center gap-2 text-xs font-semibold ${isSubActive ? 'text-green-400' : isFreePlan ? 'text-yellow-400' : 'text-red-400'}`}>
+                                        <div className="flex items-center gap-2 text-xs font-semibold" 
+                                          style={{ 
+                                            color: isSubActive ? 'var(--accent-green)' : (isFreePlan ? 'var(--accent-amber)' : '#ff0055')
+                                          }}>
                                             {isSubActive ? <ShieldCheck size={14}/> : isFreePlan ? <ShieldCheck size={14} /> : <ShieldAlert size={14}/>}
                                             {isSubActive ? 'Active' : isFreePlan ? 'Free Tier' : 'Inactive'}
                                         </div>
-                                        {!isFreePlan && user.subscription.expiresAt && <p className="text-xs text-gray-400">Expires: {new Date(user.subscription.expiresAt).toLocaleDateString()}</p>}
+                                        {!isFreePlan && user.subscription.expiresAt && <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Expires: {new Date(user.subscription.expiresAt).toLocaleDateString()}</p>}
                                     </td>
                                     <td className="p-3 text-right">
                                         <div className="flex items-center justify-end gap-1 flex-wrap">
-                                            {!isFreePlan && <button onClick={() => handleSubscriptionChange(user.id, 'toggle')} className={`px-2 py-1 text-xs rounded-md ${isSubActive ? 'bg-red-900/50 text-red-300' : 'bg-green-900/50 text-green-300'}`}>{isSubActive ? 'Disable' : 'Enable'}</button>}
-                                            <button onClick={() => handleSubscriptionChange(user.id, 'add', 30, 'monthly')} className="px-2 py-1 text-xs rounded-md bg-cyan-900/50 text-cyan-300 flex items-center gap-1"><Plus size={12}/>1M</button>
-                                            <button onClick={() => handleSubscriptionChange(user.id, 'add', 90, 'quarterly')} className="px-2 py-1 text-xs rounded-md bg-cyan-900/50 text-cyan-300 flex items-center gap-1"><Plus size={12}/>3M</button>
-                                            <button onClick={() => handleSubscriptionChange(user.id, 'add', 365, 'annually')} className="px-2 py-1 text-xs rounded-md bg-cyan-900/50 text-cyan-300 flex items-center gap-1"><Plus size={12}/>1Y</button>
+                                            {!isFreePlan && <button 
+                                              onClick={() => handleSubscriptionChange(user.id, 'toggle')} 
+                                              className="px-2 py-1 text-xs rounded-md transition-colors"
+                                              style={{
+                                                backgroundColor: isSubActive ? 'rgba(255, 0, 85, 0.3)' : 'rgba(0, 255, 0, 0.3)',
+                                                color: isSubActive ? '#ff0055' : 'var(--accent-green)'
+                                              }}
+                                            >{isSubActive ? 'Disable' : 'Enable'}</button>}
+                                            <button onClick={() => handleSubscriptionChange(user.id, 'add', 30, 'monthly')} className="px-2 py-1 text-xs rounded-md flex items-center gap-1" style={{ backgroundColor: 'rgba(0, 255, 255, 0.3)', color: 'var(--accent-cyan)' }}><Plus size={12}/>1M</button>
+                                            <button onClick={() => handleSubscriptionChange(user.id, 'add', 90, 'quarterly')} className="px-2 py-1 text-xs rounded-md flex items-center gap-1" style={{ backgroundColor: 'rgba(0, 255, 255, 0.3)', color: 'var(--accent-cyan)' }}><Plus size={12}/>3M</button>
+                                            <button onClick={() => handleSubscriptionChange(user.id, 'add', 365, 'annually')} className="px-2 py-1 text-xs rounded-md flex items-center gap-1" style={{ backgroundColor: 'rgba(0, 255, 255, 0.3)', color: 'var(--accent-cyan)' }}><Plus size={12}/>1Y</button>
                                         </div>
                                     </td>
                                 </tr>

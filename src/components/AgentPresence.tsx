@@ -93,7 +93,14 @@ const AgentPresence: React.FC<AgentPresenceProps> = ({
                                 </button>
                                 <button 
                                     onClick={handleCallButtonClick} 
-                                    className={`w-14 h-14 rounded-full flex items-center justify-center text-white ${isSessionActive ? 'bg-red-600 hover:bg-red-700 animate-pulse' : 'bg-green-600 hover:bg-green-700'}`}
+                                    className="w-14 h-14 rounded-full flex items-center justify-center transition-all"
+                                    style={{
+                                      backgroundColor: isSessionActive ? '#ff0055' : 'var(--accent-green)',
+                                      color: 'white',
+                                      animation: isSessionActive ? 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none'
+                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+                                    onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                                     title={isSessionActive ? "End Call" : "Start Call"}
                                 >
                                     {isSessionActive ? <PhoneOff size={26} /> : <Phone size={26} />}

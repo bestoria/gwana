@@ -84,13 +84,18 @@ const QuizDisplay: React.FC<QuizDisplayProps> = ({ quiz }) => {
             <div className="mt-3 grid grid-cols-1 gap-2">
                 {currentQuestion.options.map((option, index) => {
                     const isCorrect = option === currentQuestion.correctAnswer;
-                    let buttonClass = 'bg-cyan-900/50 border-cyan-700 hover:bg-cyan-800 text-cyan-300';
+                    let buttonStyle: React.CSSProperties = {
+                      backgroundColor: 'rgba(0, 255, 255, 0.3)',
+                      borderColor: 'var(--accent-cyan)',
+                      color: 'var(--accent-cyan)'
+                    };
+                    
                     if (isAnswered && selectedOption === option) {
-                        buttonClass = isCorrect
-                            ? 'bg-green-700 border-green-500 text-white'
-                            : 'bg-red-700 border-red-500 text-white';
+                        buttonStyle = isCorrect
+                            ? { backgroundColor: 'var(--accent-green)', borderColor: 'var(--accent-green)', color: 'white' }
+                            : { backgroundColor: '#ff0055', borderColor: '#ff0055', color: 'white' };
                     } else if (isAnswered && isCorrect) {
-                        buttonClass = 'bg-green-700 border-green-500 text-white';
+                        buttonStyle = { backgroundColor: 'var(--accent-green)', borderColor: 'var(--accent-green)', color: 'white' };
                     }
 
                     return (
@@ -98,7 +103,8 @@ const QuizDisplay: React.FC<QuizDisplayProps> = ({ quiz }) => {
                             key={index}
                             onClick={() => handleAnswerSelect(option)}
                             disabled={isAnswered}
-                            className={`w-full text-left p-3 rounded-md border transition-all duration-300 flex items-center justify-between text-sm ${buttonClass}`}
+                            className="w-full text-left p-3 rounded-md border transition-all duration-300 flex items-center justify-between text-sm"
+                            style={buttonStyle}
                         >
                             <span>{option}</span>
                             {isAnswered && selectedOption === option && (

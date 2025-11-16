@@ -105,14 +105,26 @@ const Footer: React.FC<FooterProps> = (props) => {
             )}
             {/* Proactive Suggestion Banner */}
             {proactiveSuggestion && (
-                 <div className="mb-2 px-3 py-2 bg-purple-900/50 border border-purple-500/50 rounded-lg flex items-center justify-between gap-4 animate-fade-in" role="alert">
+                 <div className="mb-2 px-3 py-2 rounded-lg flex items-center justify-between gap-4 animate-fade-in" role="alert"
+                   style={{
+                     backgroundColor: 'rgba(255, 0, 255, 0.2)',
+                     border: '1px solid rgba(255, 0, 255, 0.5)'
+                   }}
+                 >
                     <div className="flex items-center gap-2">
-                        <BrainCircuit size={20} className="text-purple-300"/>
-                        <p className="text-sm text-gray-200">{proactiveSuggestion.suggestionText}</p>
+                        <BrainCircuit size={20} style={{ color: 'var(--accent-magenta)' }}/>
+                        <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{proactiveSuggestion.suggestionText}</p>
                     </div>
                      <div className="flex gap-2">
-                        <button onClick={onAcceptSuggestion} className="px-3 py-1 text-sm bg-purple-600 hover:bg-purple-700 rounded-md">Yes</button>
-                        <button onClick={onDismissSuggestion} className="p-1 hover:bg-purple-500/20 rounded-full"><X size={16}/></button>
+                        <button onClick={onAcceptSuggestion} className="px-3 py-1 text-sm rounded-md transition-colors"
+                          style={{
+                            backgroundColor: 'var(--accent-magenta)',
+                            color: 'white'
+                          }}
+                        >Yes</button>
+                        <button onClick={onDismissSuggestion} className="p-1 rounded-full transition-colors"
+                          style={{ backgroundColor: 'rgba(255, 0, 255, 0.2)' }}
+                        ><X size={16}/></button>
                     </div>
                  </div>
             )}

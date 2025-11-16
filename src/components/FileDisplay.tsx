@@ -14,22 +14,22 @@ const FileDisplay: React.FC<FileDisplayProps> = ({ fileName, fileSize, fileType 
     const name = (fileName || '').toLowerCase();
 
     if (type.includes('pdf') || name.endsWith('.pdf')) {
-      return <FileText size={32} className="text-red-400" />;
+      return <FileText size={32} style={{ color: '#ff0055' }} />;
     }
     if (type.includes('wordprocessingml') || name.endsWith('.docx')) {
-      return <FileText size={32} className="text-blue-400" />;
+      return <FileText size={32} style={{ color: 'var(--accent-cyan)' }} />;
     }
     if (type.includes('zip') || ['.zip', '.rar', '.7z'].some(ext => name.endsWith(ext))) {
-      return <FileArchive size={32} className="text-purple-400" />;
+      return <FileArchive size={32} style={{ color: 'var(--accent-magenta)' }} />;
     }
     if (type.includes('json') || name.endsWith('.json')) {
-      return <FileJson size={32} className="text-yellow-400" />;
+      return <FileJson size={32} style={{ color: 'var(--accent-amber)' }} />;
     }
     if (['javascript', 'typescript', 'python', 'html'].some(lang => type.includes(lang)) || ['.js', '.ts', '.py', '.html'].some(ext => name.endsWith(ext))) {
-        return <FileCode size={32} className="text-blue-400" />;
+        return <FileCode size={32} style={{ color: 'var(--accent-cyan)' }} />;
     }
     
-    return <FileText size={32} className="text-gray-400" />;
+    return <FileText size={32} style={{ color: 'var(--text-secondary)' }} />;
   };
 
   const handleDownload = () => {

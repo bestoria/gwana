@@ -37,10 +37,10 @@ const LearningPathDisplay: React.FC<LearningPathDisplayProps> = ({ learningPath 
                         <div className="px-3 pb-3 pt-1 border-t border-gray-700/50">
                             <ul className="list-none space-y-2 text-gray-300 text-sm">
                                 {module.topics.map((topic, index) => (
-                                    <li key={index} className="flex items-start gap-2">
-                                        <CheckSquare size={16} className="text-green-400 mt-0.5 flex-shrink-0" />
-                                        <span>{topic}</span>
-                                    </li>
+                            <li key={index} className="flex items-start gap-2">
+                                <CheckSquare size={16} style={{ color: 'var(--accent-green)' }} className="mt-0.5 flex-shrink-0" />
+                                <span>{topic}</span>
+                            </li>
                                 ))}
                             </ul>
                         </div>

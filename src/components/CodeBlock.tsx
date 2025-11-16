@@ -25,7 +25,11 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ language, code }) => {
           className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
           aria-label="Copy code"
         >
-          {isCopied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
+        {isCopied ? (
+          <Check size={16} style={{ color: 'var(--accent-green)' }} />
+        ) : (
+          <Copy size={16} />
+        )}
           <span className="text-xs">{isCopied ? 'Copied!' : 'Copy'}</span>
         </button>
       </div>

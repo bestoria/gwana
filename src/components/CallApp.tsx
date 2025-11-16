@@ -112,29 +112,42 @@ const CallApp: React.FC<CallAppProps> = ({ onClose }) => {
           <div className="flex gap-4 justify-center">
             <button 
               onClick={() => handleCall('voice', selectedContact)}
-              className="flex flex-col items-center gap-2 p-4 bg-[var(--bg-secondary)] hover:bg-white/5 rounded-xl transition-colors border border-[var(--border-color)]"
+              className="flex flex-col items-center gap-2 p-4 rounded-xl transition-colors"
+              style={{
+                backgroundColor: 'var(--bg-secondary)',
+                border: '1px solid var(--border-color)'
+              }}
             >
-              <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
-                <Phone size={24} className="text-white" />
+              <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--accent-green)' }}>
+                <Phone size={24} style={{ color: 'white' }} />
               </div>
-              <span className="text-sm text-gray-300">Call</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Call</span>
             </button>
             
             <button 
               onClick={() => handleCall('video', selectedContact)}
-              className="flex flex-col items-center gap-2 p-4 bg-[var(--bg-secondary)] hover:bg-white/5 rounded-xl transition-colors border border-[var(--border-color)]"
+              className="flex flex-col items-center gap-2 p-4 rounded-xl transition-colors"
+              style={{
+                backgroundColor: 'var(--bg-secondary)',
+                border: '1px solid var(--border-color)'
+              }}
             >
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                <Video size={24} className="text-white" />
+              <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--accent-cyan)' }}>
+                <Video size={24} style={{ color: 'white' }} />
               </div>
-              <span className="text-sm text-gray-300">Video</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Video</span>
             </button>
             
-            <button className="flex flex-col items-center gap-2 p-4 bg-[var(--bg-secondary)] hover:bg-white/5 rounded-xl transition-colors border border-[var(--border-color)]">
-              <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
-                <MessageCircle size={24} className="text-white" />
+            <button className="flex flex-col items-center gap-2 p-4 rounded-xl transition-colors"
+              style={{
+                backgroundColor: 'var(--bg-secondary)',
+                border: '1px solid var(--border-color)'
+              }}
+            >
+              <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--accent-magenta)' }}>
+                <MessageCircle size={24} style={{ color: 'white' }} />
               </div>
-              <span className="text-sm text-gray-300">Message</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Message</span>
             </button>
           </div>
 

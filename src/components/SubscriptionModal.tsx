@@ -7,11 +7,11 @@ interface SubscriptionModalProps {
 }
 
 const PlanCard: React.FC<{ title: string; price: string; features: string[] }> = ({ title, price, features }) => (
-    <div className="bg-black/40 border border-gray-700 p-4 rounded-lg text-center flex flex-col">
-        <h3 className="font-bold text-lg text-cyan-300">{title}</h3>
+    <div className="p-4 rounded-lg text-center flex flex-col" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(160, 160, 192, 0.3)' }}>
+        <h3 className="font-bold text-lg" style={{ color: 'var(--accent-cyan)' }}>{title}</h3>
         <p className="text-2xl font-bold my-2">{price}</p>
-        <ul className="text-xs text-gray-400 space-y-1 mt-auto">
-            {features.map((feat, i) => <li key={i} className="flex items-center justify-center gap-2"><Check size={14} className="text-green-400"/> {feat}</li>)}
+        <ul className="text-xs space-y-1 mt-auto" style={{ color: 'var(--text-secondary)' }}>
+            {features.map((feat, i) => <li key={i} className="flex items-center justify-center gap-2"><Check size={14} style={{ color: 'var(--accent-green)' }}/> {feat}</li>)}
         </ul>
     </div>
 );
@@ -39,7 +39,11 @@ const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ onClose, isExpire
                 </div>
                  
                  {isExpired && (
-                    <div className="p-3 rounded-md text-sm flex items-center gap-3 animate-fade-in bg-red-900/50 text-red-300 border border-red-700 mb-4">
+                    <div className="p-3 rounded-md text-sm flex items-center gap-3 animate-fade-in" style={{
+                      backgroundColor: 'rgba(255, 0, 85, 0.3)',
+                      color: '#ff0055',
+                      border: '1px solid #ff0055'
+                    }}>
                         <ShieldAlert size={20} />
                         <span>Your subscription has expired. Please renew to continue.</span>
                     </div>

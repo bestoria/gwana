@@ -34,7 +34,11 @@ const JobListingDisplay: React.FC<JobListingDisplayProps> = ({ job, resumeConten
                         <div className="flex items-center justify-between">
                             <h4 className="font-bold text-gray-100 group-hover:text-cyan-300 transition-colors text-base leading-snug">{listing.title}</h4>
                             {listing.isRemote && (
-                                <span className="text-xs bg-green-900/50 text-green-300 border border-green-700 px-2 py-0.5 rounded-full">Remote</span>
+                                <span className="text-xs px-2 py-0.5 rounded-full" style={{
+                                  backgroundColor: 'rgba(0, 255, 0, 0.3)',
+                                  color: 'var(--accent-green)',
+                                  border: '1px solid var(--accent-green)'
+                                }}>Remote</span>
                             )}
                         </div>
                         <div className="flex items-center gap-4 text-gray-400 text-xs mt-1.5">
@@ -62,14 +66,24 @@ const JobListingDisplay: React.FC<JobListingDisplayProps> = ({ job, resumeConten
                                 onClick={() => handleDraftCoverLetter(listing)}
                                 disabled={!resumeContent}
                                 title={!resumeContent ? "Upload a resume to enable this feature" : "Draft Cover Letter"}
-                                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-indigo-900/50 border border-indigo-700 rounded-md hover:bg-indigo-800 text-indigo-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                style={{
+                                  backgroundColor: 'rgba(255, 0, 255, 0.3)',
+                                  border: '1px solid var(--accent-magenta)',
+                                  color: 'var(--accent-magenta)'
+                                }}
                             >
                                 <FileText size={14} /> Draft Cover Letter
                             </button>
                             {resumeContent && (
                                 <button
                                     onClick={() => handleAnalyzeSynergy(listing)}
-                                    className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-purple-900/50 border border-purple-700 rounded-md hover:bg-purple-800 text-purple-300 transition-colors"
+                                    className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md transition-colors"
+                                    style={{
+                                      backgroundColor: 'rgba(255, 0, 255, 0.3)',
+                                      border: '1px solid var(--accent-magenta)',
+                                      color: 'var(--accent-magenta)'
+                                    }}
                                 >
                                     <BrainCircuit size={14} /> Analyze Synergy
                                 </button>

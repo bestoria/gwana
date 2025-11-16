@@ -11,12 +11,12 @@ interface StudyHubScreenProps {
 
 const ItemIcon: React.FC<{ type: StudyHubItem['type'] }> = ({ type }) => {
     switch(type) {
-        case 'guide': return <FileText size={24} className="text-cyan-400" />;
-        case 'cards': return <Layers size={24} className="text-purple-400" />;
-        case 'practice': return <Target size={24} className="text-yellow-400" />;
-        case 'quiz': return <HelpCircle size={24} className="text-green-400" />;
-        case 'learningPath': return <TrendingUp size={24} className="text-orange-400" />;
-        default: return <BookOpen size={24} className="text-gray-400" />;
+        case 'guide': return <FileText size={24} style={{ color: 'var(--accent-cyan)' }} />;
+        case 'cards': return <Layers size={24} style={{ color: 'var(--accent-magenta)' }} />;
+        case 'practice': return <Target size={24} style={{ color: 'var(--accent-amber)' }} />;
+        case 'quiz': return <HelpCircle size={24} style={{ color: 'var(--accent-green)' }} />;
+        case 'learningPath': return <TrendingUp size={24} style={{ color: 'var(--accent-magenta)' }} />;
+        default: return <BookOpen size={24} style={{ color: 'var(--text-secondary)' }} />;
     }
 };
 

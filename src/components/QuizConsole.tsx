@@ -228,15 +228,15 @@ export const QuizShowUI: React.FC<QuizShowUIProps> = ({ quiz, onQuizComplete, on
                         <div className="quiz-scoreboard">
                             <div>
                                 <div className="label">Correct</div>
-                                <div className="value text-green-400">{score.correct}</div>
+                                <div className="value" style={{ color: 'var(--accent-green)' }}>{score.correct}</div>
                             </div>
                              <div>
                                 <div className="label">Streak</div>
-                                <div className="value text-yellow-400">{score.streak}</div>
+                                <div className="value" style={{ color: 'var(--accent-amber)' }}>{score.streak}</div>
                             </div>
                             <div>
                                 <div className="label">Incorrect</div>
-                                <div className="value text-red-400">{score.incorrect}</div>
+                                <div className="value" style={{ color: '#ff0055' }}>{score.incorrect}</div>
                             </div>
                         </div>
                     </>

@@ -39,7 +39,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
                     <ul className="space-y-2 text-gray-300 text-sm">
                         {recipe.ingredients.map((item, index) => (
                             <li key={index} className="flex items-start gap-2">
-                                <CheckSquare size={16} className="text-green-400 mt-0.5 flex-shrink-0" />
+                                <CheckSquare size={16} style={{ color: 'var(--accent-green)' }} className="mt-0.5 flex-shrink-0" />
                                 <span>{item}</span>
                             </li>
                         ))}
