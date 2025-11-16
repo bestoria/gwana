@@ -32,7 +32,7 @@ const Window: React.FC<WindowProps> = ({ title, icon, children, onClose }) => {
         transition-all duration-300 ease-in-out absolute
         ${isMaximized 
             ? 'top-0 left-0 w-screen h-[calc(100vh-48px)] rounded-none' // 48px is taskbar height
-            : 'w-full h-full max-w-3xl max-h-[85vh]'
+            : 'w-full h-full max-w-[92vw] max-h-[90vh]'
         }
     `;
 

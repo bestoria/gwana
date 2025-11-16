@@ -71,6 +71,11 @@ export const ProgressTracker: React.FC<{ progress: StudyProgress }> = ({ progres
 
 
 const StudyHubScreen: React.FC<StudyHubScreenProps> = ({ items, onRemove, setView, studyProgress }) => {
+  const handleItemClick = (item: StudyHubItem) => {
+    // TODO: Open item viewer
+    console.log('Opening item:', item);
+  };
+
   return (
     <div className="flex-1 bg-transparent text-white flex flex-col font-mono">
         <div className="flex-1 overflow-y-auto p-4">
