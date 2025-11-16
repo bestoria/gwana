@@ -1,7 +1,7 @@
 import React from 'react';
-import Taskbar from '@/src/components/Taskbar';
-import Sidebar from '@/src/components/Sidebar';
-import DeepSpaceBackground from '@/src/components/DeepSpaceBackground';
+import Taskbar from '@/src/shared/components/Taskbar';
+import Sidebar from '@/src/shared/components/Sidebar';
+import DeepSpaceBackground from '@/src/shared/components/DeepSpaceBackground';
 import type { AiMode, View, Persona, CallState } from '@/src/core/types';
 
 interface DesktopProps {

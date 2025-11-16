@@ -1,5 +1,5 @@
 import React from 'react';
-import NewsDeskNew from '@/src/components/NewsDeskNew';
+import NewsDeskNew from '@/src/shared/components/NewsDeskNew';
 import type { NewsArticle } from '@/src/core/types';
 
 interface NewsAppProps {

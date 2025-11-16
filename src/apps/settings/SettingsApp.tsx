@@ -1,5 +1,5 @@
 import React from 'react';
-import SettingsScreen from '@/src/components/SettingsScreen';
+import SettingsScreen from '@/src/shared/components/SettingsScreen';
 import type { Settings, UserProfile } from '@/src/core/types';
 
 interface SettingsAppProps {

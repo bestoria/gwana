@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChatUI } from '@/src/components/ChatUI';
+import { ChatUI } from '@/src/shared/components/ChatUI';
 import type { AiMode, Persona, Message, Settings } from '@/src/core/types';
 
 interface ChatAppProps {
