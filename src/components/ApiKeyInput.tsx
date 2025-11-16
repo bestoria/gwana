@@ -9,7 +9,6 @@ const ApiKeyInput: React.FC = () => {
     if (apiKey.trim()) {
       localStorage.setItem('gemini_api_key', apiKey.trim());
       setIsOpen(false);
-      window.location.reload();
     }
   };
 
@@ -17,7 +16,6 @@ const ApiKeyInput: React.FC = () => {
     localStorage.removeItem('gemini_api_key');
     setApiKey('');
     setIsOpen(false);
-    window.location.reload();
   };
 
   return (
