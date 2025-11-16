@@ -68,17 +68,17 @@ const AIWritingAssistant: React.FC = () => {
                             <FileText size={20} />
                         </HolographicText>
 
-                        {/* Mode Selection */}
-                        <div className="space-y-3">
-                            <HolographicText className="text-xs tracking-wide opacity-70">WRITING MODE</HolographicText>
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        {/* Mode Selection - Compact */}
+                        <div className="space-y-2">
+                            <HolographicText className="text-[10px] tracking-wide opacity-70">MODE</HolographicText>
+                            <div className="grid grid-cols-4 sm:grid-cols-8 gap-1">
                                 {WRITING_MODES.map(mode => (
                                     <button
                                         key={mode.id}
                                         onClick={() => setSelectedMode(mode.id)}
-                                        className={`p-3 rounded-lg border transition-all text-sm ${
+                                        className={`px-2 py-1 rounded border transition-all text-[10px] ${
                                             selectedMode === mode.id
-                                                ? 'bg-purple-500/20 border-purple-400 shadow-lg shadow-purple-500/20'
+                                                ? 'bg-purple-500/20 border-purple-400'
                                                 : 'bg-black/20 border-gray-700 hover:border-purple-600'
                                         }`}
                                     >
@@ -88,17 +88,15 @@ const AIWritingAssistant: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Input */}
+                        {/* Input - Compact */}
                         <div className="space-y-2">
-                            <HolographicText className="text-xs tracking-wide opacity-70">
-                                {WRITING_MODES.find(m => m.id === selectedMode)?.prompt}
-                            </HolographicText>
+                            <HolographicText className="text-[10px] tracking-wide opacity-70">TOPIC</HolographicText>
                             <textarea
                                 value={topic}
                                 onChange={(e) => setTopic(e.target.value)}
-                                placeholder="Enter your topic or text here..."
-                                rows={4}
-                                className="w-full bg-black/40 border border-purple-600/30 rounded-lg p-4 text-sm text-purple-100 placeholder-purple-800 focus:outline-none focus:border-purple-400 transition-colors resize-none"
+                                placeholder="Enter your topic..."
+                                rows={2}
+                                className="w-full bg-black/50 border border-purple-600/30 rounded p-2 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 resize-none text-xs"
                             />
                         </div>
 

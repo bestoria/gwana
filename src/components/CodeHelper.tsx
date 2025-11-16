@@ -73,37 +73,37 @@ const CodeHelper: React.FC = () => {
                             <Terminal size={20} />
                         </HolographicText>
 
-                        {/* Task Type Selection */}
-                        <div className="space-y-3">
-                            <HolographicText className="text-xs tracking-wide opacity-70">TASK TYPE</HolographicText>
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        {/* Task Type Selection - Compact */}
+                        <div className="space-y-2">
+                            <HolographicText className="text-[10px] tracking-wide opacity-70">TASK</HolographicText>
+                            <div className="grid grid-cols-4 gap-1">
                                 {TASK_TYPES.map(task => {
                                     const Icon = task.icon;
                                     return (
                                         <button
                                             key={task.id}
                                             onClick={() => setTaskType(task.id)}
-                                            className={`p-3 rounded-lg border transition-all flex items-center gap-2 ${
+                                            className={`px-2 py-1 rounded border transition-all flex items-center gap-1 text-[10px] ${
                                                 taskType === task.id
-                                                    ? 'bg-green-500/20 border-green-400 shadow-lg shadow-green-500/20'
+                                                    ? 'bg-green-500/20 border-green-400'
                                                     : 'bg-black/20 border-gray-700 hover:border-green-600'
                                             }`}
                                         >
-                                            <Icon size={16} />
-                                            <span className="text-sm">{task.name}</span>
+                                            <Icon size={12} />
+                                            {task.name.split(' ')[0]}
                                         </button>
                                     );
                                 })}
                             </div>
                         </div>
 
-                        {/* Language Selection */}
-                        <div className="space-y-2">
-                            <HolographicText className="text-xs tracking-wide opacity-70">PROGRAMMING LANGUAGE</HolographicText>
+                        {/* Language Selection - Compact */}
+                        <div className="space-y-1">
+                            <HolographicText className="text-[10px] tracking-wide opacity-70">LANG</HolographicText>
                             <select
                                 value={language}
                                 onChange={(e) => setLanguage(e.target.value)}
-                                className="w-full bg-black/40 border border-green-600/30 rounded-lg p-3 text-sm text-green-100 focus:outline-none focus:border-green-400 transition-colors"
+                                className="w-full bg-black/40 border border-green-600/30 rounded px-2 py-1 text-xs text-green-100 focus:outline-none focus:border-green-400"
                             >
                                 {LANGUAGES.map(lang => (
                                     <option key={lang} value={lang}>{lang}</option>
@@ -111,19 +111,17 @@ const CodeHelper: React.FC = () => {
                             </select>
                         </div>
 
-                        {/* Input */}
-                        <div className="space-y-2">
-                            <HolographicText className="text-xs tracking-wide opacity-70">
-                                {taskType === 'generate' ? 'DESCRIBE WHAT YOU WANT TO BUILD' : 'PASTE YOUR CODE'}
+                        {/* Input - Compact */}
+                        <div className="space-y-1">
+                            <HolographicText className="text-[10px] tracking-wide opacity-70">
+                                {taskType === 'generate' ? 'DESCRIBE' : 'CODE'}
                             </HolographicText>
                             <textarea
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
-                                placeholder={taskType === 'generate' 
-                                    ? 'E.g., A function that sorts an array of objects by date...' 
-                                    : 'Paste your code here...'}
-                                rows={8}
-                                className="w-full bg-black/40 border border-green-600/30 rounded-lg p-4 text-sm text-green-100 placeholder-green-800 focus:outline-none focus:border-green-400 transition-colors resize-none font-mono"
+                                placeholder={taskType === 'generate' ? 'Function that...' : 'Paste code...'}
+                                rows={6}
+                                className="w-full bg-black/40 border border-green-600/30 rounded p-2 text-xs text-green-100 placeholder-green-800 focus:outline-none focus:border-green-400 resize-none font-mono"
                             />
                         </div>
 
