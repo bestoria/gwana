@@ -42,6 +42,10 @@ import Taskbar from './components/Taskbar';
 import MobileFooter from './components/MobileFooter';
 import DesktopAssistant from './components/DesktopAssistant';
 import Window from './components/Window';
+import AnalyticsDashboard from './components/AnalyticsDashboard';
+import FlashcardManager from './components/FlashcardManager';
+import FlashcardReviewSession from './components/FlashcardReviewSession';
+import { FlashcardDeck } from './lib/studyDB';
 
 declare const pdfjsLib: any;
 declare const mammoth: any;
@@ -316,6 +320,13 @@ const KwararruAppUI: React.FC<any> = (props) => {
                 return <CallApp />;
             case 'dashboard':
                  return <DashboardScreen isDesktop={isDesktop} setView={setView} setAiMode={handleSetAiMode} persona={persona} setPersona={handleSetPersona} />
+            case 'analytics':
+                return <AnalyticsDashboard onBack={() => setView('dashboard')} />;
+            case 'flashcards':
+                if (reviewingDeck) {
+                    return <FlashcardReviewSession deck={reviewingDeck} onExit={() => { setReviewingDeck(null); setView('flashcards'); }} />;
+                }
+                return <FlashcardManager onStartReview={setReviewingDeck} />;
             default:
                 return null;
         }
@@ -410,6 +421,14 @@ const KwararruAppUI: React.FC<any> = (props) => {
                      <DashboardScreen isDesktop={isDesktop} setView={setView} setAiMode={handleSetAiMode} persona={persona} setPersona={handleSetPersona} />
                 ) : view === 'appDrawer' ? (
                     <AppDrawer setView={setView} setAiMode={setAiMode} />
+                ) : view === 'analytics' ? (
+                    <AnalyticsDashboard onBack={() => setView('dashboard')} />
+                ) : view === 'flashcards' ? (
+                    reviewingDeck ? (
+                        <FlashcardReviewSession deck={reviewingDeck} onExit={() => { setReviewingDeck(null); setView('flashcards'); }} />
+                    ) : (
+                        <FlashcardManager onStartReview={setReviewingDeck} />
+                    )
                 ) : (
                     <div className="mobile-app-layout">
                         <header className="mobile-app-header">
@@ -510,6 +529,7 @@ const KwararruApp: React.FC<{
     const [radioLocation, setRadioLocation] = useState('Nigeria');
     const [radioCategory, setRadioCategory] = useState('General');
     const [isCalendarFormOpen, setIsCalendarFormOpen] = useState(false);
+    const [reviewingDeck, setReviewingDeck] = useState<FlashcardDeck | null>(null);
 
     const textInputRef = useRef<HTMLInputElement>(null);
     const [inputText, setInputText] = useState('');
