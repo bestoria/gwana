@@ -3,6 +3,7 @@ import { Logo } from './Logo';
 import { countries } from '@/src/lib/countries';
 import type { Country } from '@/src/lib/types';
 import { Loader } from 'lucide-react';
+import ApiKeyInput from './ApiKeyInput';
 
 interface LoginScreenProps {
   onLogin: (phone: string, pin: string) => Promise<{ success: boolean; message: string }>;
@@ -114,6 +115,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin, onSignup }) => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-[#0a0a1a] to-[#1a1a2e] p-4 text-white font-mono login-container">
+      <ApiKeyInput />
       <div className="w-full max-w-md bg-black/30 backdrop-blur-md border border-[var(--border-color)] p-8 rounded-lg shadow-2xl">
         <div className="flex flex-col items-center mb-8">
           <Logo persona="Agent Zero" />
