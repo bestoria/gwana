@@ -6,10 +6,19 @@ import { AI_MODES, AI_MODE_GREETINGS, VOICE_NAMES } from '@/src/lib/constants';
 const OFFLINE_RESPONSE_TEXT = "AI features are disabled. An API key is required to use this feature.";
 
 let ai: GoogleGenAI;
-if (process.env.API_KEY) {
-  ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
+// Check localStorage first, then environment variable
+const getApiKey = () => {
+  const storedKey = localStorage.getItem('gemini_api_key');
+  if (storedKey) return storedKey;
+  return process.env.API_KEY;
+};
+
+const apiKey = getApiKey();
+if (apiKey) {
+  ai = new GoogleGenAI({ apiKey });
 } else {
-  console.warn("API_KEY environment variable not set. AI features will be disabled.");
+  console.warn("API_KEY not set. AI features will be disabled.");
 }
 
 export interface GeminiServiceResponse {
