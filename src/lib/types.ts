@@ -551,7 +551,7 @@ export interface CallRecord {
   type: 'outgoing' | 'incoming';
 }
 
-export type View = 'dashboard' | 'chat' | 'settings' | 'studyHub' | 'calendar' | 'vettingQueue' | 'appDrawer';
+export type View = 'dashboard' | 'chat' | 'settings' | 'studyHub' | 'calendar' | 'vettingQueue' | 'appDrawer' | 'aiWriter' | 'codeHelper' | 'voiceJournal';
 
 // FIX: Added 'disconnecting' and 'paused' to the CallState type to reflect all possible states.
 export type CallState = 'idle' | 'ringing' | 'connecting' | 'connected' | 'disconnecting' | 'confirmingEnd' | 'standby' | 'paused';

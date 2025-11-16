@@ -31,6 +31,9 @@ import { QuizShowUI } from './components/QuizConsole';
 import DebateStageUI from './components/DebateStageUI';
 import TranslatorConsole from './components/TranslatorConsole';
 import KeyboardShortcutsModal from './components/KeyboardShortcutsModal';
+import AIWritingAssistant from './components/AIWritingAssistant';
+import CodeHelper from './components/CodeHelper';
+import VoiceJournal from './components/VoiceJournal';
 import DashboardScreen from './components/DashboardScreen';
 import AppDrawer from './components/AppDrawer';
 import Taskbar from './components/Taskbar';
@@ -303,6 +306,12 @@ const KwararruAppUI: React.FC<any> = (props) => {
                 return <CalendarScreen {...{events: calendarEvents, onAddEvent: handleAddCalendarEvent, onDeleteEvent: handleDeleteCalendarEvent, setView, setIsFormOpen: setIsCalendarFormOpen}} />;
             case 'appDrawer':
                 return <AppDrawer {...{setView, setAiMode}} />;
+            case 'aiWriter':
+                return <AIWritingAssistant />;
+            case 'codeHelper':
+                return <CodeHelper />;
+            case 'voiceJournal':
+                return <VoiceJournal />;
             case 'dashboard':
                  return <DashboardScreen isDesktop={isDesktop} setView={setView} setAiMode={handleSetAiMode} persona={persona} setPersona={handleSetPersona} />
             default:
@@ -1152,7 +1161,7 @@ export default function App() {
         }
     }
     
-    if (!process.env.API_KEY) {
+    if (!process.env.API_KEY && !localStorage.getItem('gemini_api_key')) {
         return <ApiKeyWarning />;
     }
 

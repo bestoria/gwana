@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Calculator, Calendar } from 'lucide-react';
+import { ArrowLeft, Calculator, Calendar, Sparkles, Code, BookOpen } from 'lucide-react';
 import { AI_MODES } from '../lib/constants';
 import type { View, AiMode } from '../lib/types';
 
@@ -28,6 +28,21 @@ const AppDrawer: React.FC<AppDrawerProps> = ({ setView, setAiMode }) => {
             label: 'Study Hub',
             icon: AI_MODES.find(m => m.mode === 'study')?.iconComponent,
             onClick: () => setView('studyHub')
+        },
+        {
+            label: 'AI Writer',
+            icon: Sparkles,
+            onClick: () => setView('aiWriter')
+        },
+        {
+            label: 'Code Helper',
+            icon: Code,
+            onClick: () => setView('codeHelper')
+        },
+        {
+            label: 'Voice Journal',
+            icon: BookOpen,
+            onClick: () => setView('voiceJournal')
         },
         {
             label: 'Calculator',
