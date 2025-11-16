@@ -1,65 +1,117 @@
-import { Button } from "./ui/button";
-import { MessageSquare, Clock, Lightbulb, Settings, Sparkles } from "lucide-react";
-import { cn } from "@/lib/utils";
+import React, { useMemo } from 'react';
+import { Settings, Code, MessageSquare, BookOpen, Car, Calendar, Globe } from 'lucide-react';
+import type { AiMode, View, Persona, CallState } from '@/src/lib/types';
+import { AI_MODES } from '@/src/lib/constants';
+import { Logo } from './Logo';
 
 interface SidebarProps {
-  currentView: "conversation" | "history" | "topics" | "settings";
-  onViewChange: (view: "conversation" | "history" | "topics" | "settings") => void;
+  activeMode: AiMode;
+  setAiMode: (mode: AiMode) => void;
+  activeView: View;
+  setView: (view: View) => void;
+  persona: Persona;
+  callState: CallState;
 }
 
-const Sidebar = ({ currentView, onViewChange }: SidebarProps) => {
-  const menuItems = [
-    { id: "conversation" as const, icon: MessageSquare, label: "Conversation" },
-    { id: "history" as const, icon: Clock, label: "History" },
-    { id: "topics" as const, icon: Lightbulb, label: "Topics" },
-    { id: "settings" as const, icon: Settings, label: "Settings" },
-  ];
+interface NavButtonProps {
+  label: string;
+  icon: string | React.ReactElement;
+  mode?: AiMode;
+  view?: View;
+  isActive: boolean;
+  onClick: () => void;
+  disabled: boolean;
+}
 
+const NavButton: React.FC<NavButtonProps> = ({
+  label,
+  icon,
+  mode,
+  view,
+  isActive,
+  onClick,
+  disabled,
+}) => {
   return (
-    <aside className="fixed left-0 top-0 h-screen w-80 glass-panel border-r border-white/10 p-6 z-20">
-      {/* Logo/Brand */}
-      <div className="mb-12 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary via-accent to-secondary flex items-center justify-center">
-          <Sparkles className="w-6 h-6 text-white" />
-        </div>
-        <div>
-          <h1 className="text-xl font-bold text-gradient">AI Companion</h1>
-          <p className="text-xs text-muted-foreground">Your intelligent partner</p>
-        </div>
+    <button
+      id={mode === 'news' ? 'onboarding-sidebar-news-button' : undefined}
+      onClick={onClick}
+      title={label}
+      disabled={disabled}
+      className={`w-14 h-14 rounded-lg flex items-center justify-center transition-all duration-200 relative group ${ disabled ? 'opacity-50 cursor-not-allowed' : ''} ${
+        isActive
+          ? 'bg-cyan-900/50 text-cyan-300'
+          : 'text-gray-400 hover:bg-gray-800'
+      }`}
+    >
+      {typeof icon === 'string' ? <span className="text-2xl">{icon}</span> : icon}
+      {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 bg-cyan-400 rounded-r-full" style={{boxShadow: '0 0 10px var(--accent-cyan)'}}></div>}
+      <div className="absolute left-full ml-3 w-max px-3 py-1.5 bg-black/80 text-white text-xs font-semibold rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+        {label}
       </div>
+    </button>
+  );
+};
 
-      {/* Navigation */}
-      <nav className="space-y-2">
-        {menuItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = currentView === item.id;
-          
+const Sidebar: React.FC<SidebarProps> = ({ activeMode, setAiMode, activeView, setView, persona, callState }) => {
+  const isCallActive = callState !== 'idle' && callState !== 'standby';
+  
+  return (
+    <div className="h-full w-20 bg-black flex flex-col items-center justify-between py-4 border-r border-gray-800">
+      <div className="flex flex-col items-center gap-2">
+        <div className="mb-4" title="Kwararru AI">
+            <Logo persona={persona} />
+        </div>
+        
+        {AI_MODES.map(modeInfo => {
+          const Icon = modeInfo.iconComponent;
           return (
-            <Button
-              key={item.id}
-              variant="ghost"
-              className={cn(
-                "w-full justify-start gap-3 h-12 transition-all duration-300",
-                isActive 
-                  ? "bg-primary/20 text-primary hover:bg-primary/30" 
-                  : "hover:bg-white/5 text-muted-foreground hover:text-foreground"
-              )}
-              onClick={() => onViewChange(item.id)}
-            >
-              <Icon className="w-5 h-5" />
-              <span className="font-medium">{item.label}</span>
-            </Button>
+            <NavButton
+              key={modeInfo.mode}
+              label={modeInfo.name}
+              icon={<Icon size={24} />}
+              mode={modeInfo.mode}
+              isActive={activeView === 'chat' && activeMode === modeInfo.mode}
+              onClick={() => {
+                  setView('chat');
+                  setAiMode(modeInfo.mode);
+              }}
+              disabled={isCallActive}
+            />
           );
         })}
-      </nav>
+        
+        <div className="w-10 border-b border-gray-700 my-2" />
 
-      {/* Quick Stats */}
-      <div className="absolute bottom-6 left-6 right-6 glass-panel p-4 rounded-2xl">
-        <p className="text-xs text-muted-foreground mb-2">Today's conversation</p>
-        <p className="text-2xl font-bold text-gradient">12 min</p>
-        <p className="text-xs text-muted-foreground mt-1">3 sessions completed</p>
+        <NavButton
+            label="Study Hub"
+            icon={<BookOpen size={24} />}
+            view="studyHub"
+            isActive={activeView === 'studyHub'}
+            onClick={() => setView('studyHub')}
+            disabled={isCallActive}
+        />
+
       </div>
-    </aside>
+      <div className="flex flex-col items-center gap-4">
+        <button
+            onClick={() => setView('settings')}
+            title="Settings"
+            disabled={isCallActive}
+            className={`w-14 h-14 rounded-lg flex items-center justify-center transition-all duration-200 relative group ${isCallActive ? 'opacity-50 cursor-not-allowed' : ''} ${
+              activeView === 'settings'
+                ? 'bg-cyan-900/50 text-cyan-300'
+                : 'text-gray-400 hover:bg-gray-800'
+            }`}
+        >
+            <Settings size={24} />
+            {activeView === 'settings' && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 bg-cyan-400 rounded-r-full" style={{boxShadow: '0 0 10px var(--accent-cyan)'}}></div>}
+            <div className="absolute left-full ml-3 w-max px-3 py-1.5 bg-black/80 text-white text-xs font-semibold rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+              Settings
+            </div>
+        </button>
+      </div>
+    </div>
   );
 };
 
