@@ -1,6 +1,6 @@
 import React from 'react';
-import MobileFooter from '@/src/components/MobileFooter';
-import DeepSpaceBackground from '@/src/components/DeepSpaceBackground';
+import MobileFooter from '@/src/shared/components/MobileFooter';
+import DeepSpaceBackground from '@/src/shared/components/DeepSpaceBackground';
 import type { AiMode, View } from '@/src/core/types';
 
 interface MobileProps {

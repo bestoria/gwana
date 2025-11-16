@@ -1,5 +1,5 @@
 import React from 'react';
-import StudyHubScreenNew from '@/src/components/StudyHubScreenNew';
+import StudyHubScreenNew from '@/src/shared/components/StudyHubScreenNew';
 
 interface StudyAppProps {
   // Add props as needed

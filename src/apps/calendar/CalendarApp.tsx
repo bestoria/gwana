@@ -1,5 +1,5 @@
 import React from 'react';
-import CalendarScreen from '@/src/components/CalendarScreen';
+import CalendarScreen from '@/src/shared/components/CalendarScreen';
 
 interface CalendarAppProps {
   // Add props as needed
