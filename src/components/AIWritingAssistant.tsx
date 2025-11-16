@@ -54,21 +54,21 @@ const AIWritingAssistant: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-full bg-gradient-to-br from-[#0a0a1a] to-[#1a1a2e] p-4 overflow-y-auto">
+        <div className="flex flex-col h-full p-4 overflow-y-auto" style={{ backgroundColor: 'var(--bg-primary)' }}>
             <div className="max-w-5xl mx-auto w-full space-y-4">
-                <HolographicPanel glowColor="purple" withGrid withCorners>
-                    <div className="p-6 space-y-4">
+                <HolographicPanel glowColor="magenta" withGrid withCorners>
+                    <div className="p-4 space-y-3">
                         <HolographicText 
-                            className="text-center text-lg font-bold tracking-widest flex items-center justify-center gap-2" 
-                            glowColor="purple" 
+                            className="text-center text-base font-bold tracking-widest flex items-center justify-center gap-2" 
+                            glowColor="magenta" 
                             flickerEffect
                         >
-                            <Sparkles size={24} className="animate-pulse" />
+                            <Sparkles size={20} className="animate-pulse" />
                             AI WRITING ASSISTANT
-                            <FileText size={20} />
+                            <FileText size={18} />
                         </HolographicText>
 
-                        {/* Mode Selection - Compact */}
+                        {/* Mode Selection */}
                         <div className="space-y-2">
                             <HolographicText className="text-[10px] tracking-wide opacity-70">MODE</HolographicText>
                             <div className="grid grid-cols-4 sm:grid-cols-8 gap-1">
@@ -76,11 +76,16 @@ const AIWritingAssistant: React.FC = () => {
                                     <button
                                         key={mode.id}
                                         onClick={() => setSelectedMode(mode.id)}
-                                        className={`px-2 py-1 rounded border transition-all text-[10px] ${
+                                        className={`px-2 py-1.5 rounded text-[10px] transition-all ${
                                             selectedMode === mode.id
-                                                ? 'bg-purple-500/20 border-purple-400'
-                                                : 'bg-black/20 border-gray-700 hover:border-purple-600'
+                                                ? 'border-2'
+                                                : 'border'
                                         }`}
+                                        style={{
+                                            backgroundColor: selectedMode === mode.id ? 'rgba(255, 0, 255, 0.1)' : 'rgba(0, 0, 0, 0.3)',
+                                            borderColor: selectedMode === mode.id ? 'var(--accent-magenta)' : 'rgba(160, 160, 192, 0.3)',
+                                            color: 'var(--text-primary)'
+                                        }}
                                     >
                                         {mode.name}
                                     </button>
@@ -88,15 +93,20 @@ const AIWritingAssistant: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Input - Compact */}
+                        {/* Input */}
                         <div className="space-y-2">
                             <HolographicText className="text-[10px] tracking-wide opacity-70">TOPIC</HolographicText>
                             <textarea
                                 value={topic}
                                 onChange={(e) => setTopic(e.target.value)}
-                                placeholder="Enter your topic..."
-                                rows={2}
-                                className="w-full bg-black/50 border border-purple-600/30 rounded p-2 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 resize-none text-xs"
+                                placeholder="Enter your topic or text..."
+                                rows={3}
+                                className="w-full rounded p-3 text-xs resize-none"
+                                style={{
+                                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                    border: '1px solid var(--border-color)',
+                                    color: 'var(--text-primary)'
+                                }}
                             />
                         </div>
 
@@ -106,16 +116,16 @@ const AIWritingAssistant: React.FC = () => {
                             disabled={!topic.trim() || isGenerating}
                             fullWidth
                             size="large"
-                            color="purple"
+                            color="magenta"
                         >
                             {isGenerating ? (
                                 <>
-                                    <Loader size={18} className="animate-spin" />
+                                    <Loader size={16} className="animate-spin" />
                                     GENERATING...
                                 </>
                             ) : (
                                 <>
-                                    <Sparkles size={18} />
+                                    <Sparkles size={16} />
                                     GENERATE CONTENT
                                 </>
                             )}
@@ -126,31 +136,46 @@ const AIWritingAssistant: React.FC = () => {
                 {/* Generated Content */}
                 {generatedContent && (
                     <HolographicPanel glowColor="cyan" withScanlines>
-                        <div className="p-6 space-y-4">
-                            <div className="flex items-center justify-between">
+                        <div className="p-4 space-y-3">
+                            <div className="flex items-center justify-between mb-2">
                                 <HolographicText className="text-sm font-bold tracking-wide" glowColor="cyan">
                                     GENERATED CONTENT
                                 </HolographicText>
                                 <div className="flex gap-2">
                                     <button
                                         onClick={handleCopy}
-                                        className="p-2 rounded bg-black/40 border border-cyan-600/30 hover:border-cyan-400 transition-colors"
+                                        className="p-2 rounded transition-colors"
+                                        style={{
+                                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                                            border: '1px solid rgba(0, 255, 255, 0.3)'
+                                        }}
                                         title="Copy to clipboard"
                                     >
-                                        <Copy size={16} />
+                                        <Copy size={14} style={{ color: 'var(--accent-cyan)' }} />
                                     </button>
                                     <button
                                         onClick={handleDownload}
-                                        className="p-2 rounded bg-black/40 border border-cyan-600/30 hover:border-cyan-400 transition-colors"
+                                        className="p-2 rounded transition-colors"
+                                        style={{
+                                            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                                            border: '1px solid rgba(0, 255, 255, 0.3)'
+                                        }}
                                         title="Download as file"
                                     >
-                                        <Download size={16} />
+                                        <Download size={14} style={{ color: 'var(--accent-cyan)' }} />
                                     </button>
                                 </div>
                             </div>
                             
-                            <div className="bg-black/40 border border-cyan-600/20 rounded-lg p-4 max-h-[500px] overflow-y-auto">
-                                <p className="text-sm leading-relaxed whitespace-pre-wrap text-gray-200">
+                            <div 
+                                className="rounded-lg p-4 overflow-y-auto"
+                                style={{
+                                    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                                    border: '1px solid rgba(0, 255, 255, 0.2)',
+                                    maxHeight: '400px'
+                                }}
+                            >
+                                <p className="text-sm leading-relaxed whitespace-pre-wrap" style={{ color: 'var(--text-primary)' }}>
                                     {generatedContent}
                                 </p>
                             </div>

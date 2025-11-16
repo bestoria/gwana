@@ -59,21 +59,21 @@ const CodeHelper: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-full bg-gradient-to-br from-[#0a0a1a] to-[#1a1a2e] p-4 overflow-y-auto">
+        <div className="flex flex-col h-full p-4 overflow-y-auto" style={{ backgroundColor: 'var(--bg-primary)' }}>
             <div className="max-w-7xl mx-auto w-full space-y-4">
                 <HolographicPanel glowColor="green" withGrid withCorners>
-                    <div className="p-6 space-y-4">
+                    <div className="p-4 space-y-3">
                         <HolographicText 
-                            className="text-center text-lg font-bold tracking-widest flex items-center justify-center gap-2" 
+                            className="text-center text-base font-bold tracking-widest flex items-center justify-center gap-2" 
                             glowColor="green" 
                             flickerEffect
                         >
-                            <Code size={24} className="animate-pulse" />
+                            <Code size={20} className="animate-pulse" />
                             AI CODE ASSISTANT
-                            <Terminal size={20} />
+                            <Terminal size={18} />
                         </HolographicText>
 
-                        {/* Task Type Selection - Compact */}
+                        {/* Task Type Selection */}
                         <div className="space-y-2">
                             <HolographicText className="text-[10px] tracking-wide opacity-70">TASK</HolographicText>
                             <div className="grid grid-cols-4 gap-1">
@@ -83,45 +83,56 @@ const CodeHelper: React.FC = () => {
                                         <button
                                             key={task.id}
                                             onClick={() => setTaskType(task.id)}
-                                            className={`px-2 py-1 rounded border transition-all flex items-center gap-1 text-[10px] ${
-                                                taskType === task.id
-                                                    ? 'bg-green-500/20 border-green-400'
-                                                    : 'bg-black/20 border-gray-700 hover:border-green-600'
-                                            }`}
+                                            className="px-2 py-1.5 rounded text-[10px] transition-all flex items-center justify-center gap-1"
+                                            style={{
+                                                backgroundColor: taskType === task.id ? 'rgba(0, 255, 0, 0.1)' : 'rgba(0, 0, 0, 0.3)',
+                                                border: taskType === task.id ? '2px solid var(--accent-green)' : '1px solid rgba(160, 160, 192, 0.3)',
+                                                color: 'var(--text-primary)'
+                                            }}
                                         >
                                             <Icon size={12} />
-                                            {task.name.split(' ')[0]}
+                                            <span>{task.name.split(' ')[0]}</span>
                                         </button>
                                     );
                                 })}
                             </div>
                         </div>
 
-                        {/* Language Selection - Compact */}
-                        <div className="space-y-1">
-                            <HolographicText className="text-[10px] tracking-wide opacity-70">LANG</HolographicText>
+                        {/* Language Selection */}
+                        <div className="space-y-2">
+                            <HolographicText className="text-[10px] tracking-wide opacity-70">LANGUAGE</HolographicText>
                             <select
                                 value={language}
                                 onChange={(e) => setLanguage(e.target.value)}
-                                className="w-full bg-black/40 border border-green-600/30 rounded px-2 py-1 text-xs text-green-100 focus:outline-none focus:border-green-400"
+                                className="w-full rounded px-3 py-2 text-xs focus:outline-none"
+                                style={{
+                                    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                                    border: '1px solid var(--border-color)',
+                                    color: 'var(--text-primary)'
+                                }}
                             >
                                 {LANGUAGES.map(lang => (
-                                    <option key={lang} value={lang}>{lang}</option>
+                                    <option key={lang} value={lang} style={{ backgroundColor: 'var(--bg-secondary)' }}>{lang}</option>
                                 ))}
                             </select>
                         </div>
 
-                        {/* Input - Compact */}
-                        <div className="space-y-1">
+                        {/* Input */}
+                        <div className="space-y-2">
                             <HolographicText className="text-[10px] tracking-wide opacity-70">
-                                {taskType === 'generate' ? 'DESCRIBE' : 'CODE'}
+                                {taskType === 'generate' ? 'DESCRIPTION' : 'CODE INPUT'}
                             </HolographicText>
                             <textarea
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
-                                placeholder={taskType === 'generate' ? 'Function that...' : 'Paste code...'}
-                                rows={6}
-                                className="w-full bg-black/40 border border-green-600/30 rounded p-2 text-xs text-green-100 placeholder-green-800 focus:outline-none focus:border-green-400 resize-none font-mono"
+                                placeholder={taskType === 'generate' ? 'Describe the function you need...' : 'Paste your code here...'}
+                                rows={8}
+                                className="w-full rounded p-3 text-xs resize-none font-mono"
+                                style={{
+                                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                    border: '1px solid var(--border-color)',
+                                    color: 'var(--text-primary)'
+                                }}
                             />
                         </div>
 
@@ -135,12 +146,12 @@ const CodeHelper: React.FC = () => {
                         >
                             {isProcessing ? (
                                 <>
-                                    <Loader size={18} className="animate-spin" />
+                                    <Loader size={16} className="animate-spin" />
                                     PROCESSING...
                                 </>
                             ) : (
                                 <>
-                                    <Sparkles size={18} />
+                                    <Sparkles size={16} />
                                     {taskType === 'generate' ? 'GENERATE CODE' : taskType.toUpperCase()}
                                 </>
                             )}
@@ -151,22 +162,33 @@ const CodeHelper: React.FC = () => {
                 {/* Output */}
                 {output && (
                     <HolographicPanel glowColor="cyan" withScanlines>
-                        <div className="p-6 space-y-4">
-                            <div className="flex items-center justify-between">
+                        <div className="p-4 space-y-3">
+                            <div className="flex items-center justify-between mb-2">
                                 <HolographicText className="text-sm font-bold tracking-wide" glowColor="cyan">
                                     OUTPUT
                                 </HolographicText>
                                 <button
                                     onClick={handleCopy}
-                                    className="p-2 rounded bg-black/40 border border-cyan-600/30 hover:border-cyan-400 transition-colors"
+                                    className="p-2 rounded transition-colors"
+                                    style={{
+                                        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                                        border: '1px solid rgba(0, 255, 255, 0.3)'
+                                    }}
                                     title="Copy to clipboard"
                                 >
-                                    <Copy size={16} />
+                                    <Copy size={14} style={{ color: 'var(--accent-cyan)' }} />
                                 </button>
                             </div>
                             
-                            <div className="bg-black/60 border border-cyan-600/20 rounded-lg p-4 max-h-[600px] overflow-y-auto">
-                                <pre className="text-xs leading-relaxed text-gray-200 whitespace-pre-wrap font-mono">
+                            <div 
+                                className="rounded-lg p-4 overflow-y-auto font-mono"
+                                style={{
+                                    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                                    border: '1px solid rgba(0, 255, 255, 0.2)',
+                                    maxHeight: '500px'
+                                }}
+                            >
+                                <pre className="text-xs leading-relaxed whitespace-pre-wrap" style={{ color: 'var(--text-primary)' }}>
                                     {output}
                                 </pre>
                             </div>
