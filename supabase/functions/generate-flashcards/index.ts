@@ -1,4 +1,9 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+declare const Deno: {
+  serve: (handler: (req: Request) => Promise<Response>) => void;
+  env: {
+    get: (key: string) => string | undefined;
+  };
+};
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',

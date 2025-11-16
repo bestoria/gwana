@@ -164,7 +164,9 @@ const KwararruAppUI: React.FC<any> = (props) => {
         assistantMessages,
         handleSendAssistantMessage,
         isCalendarFormOpen,
-        setIsCalendarFormOpen
+        setIsCalendarFormOpen,
+        reviewingDeck,
+        setReviewingDeck
     } = props;
 
     // CONTEXT-DEPENDENT LOGIC
@@ -1122,6 +1124,8 @@ const KwararruApp: React.FC<{
         handleSendAssistantMessage,
         isCalendarFormOpen,
         setIsCalendarFormOpen,
+        reviewingDeck,
+        setReviewingDeck,
     };
     return <KwararruAppUI {...appUIProps} />;
 };
