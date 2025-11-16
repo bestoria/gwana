@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { ArrowLeft, Calendar, Plus, X, Trash2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Plus, X, Trash2, Brain } from 'lucide-react';
 import type { View, CalendarEvent } from '../lib/types';
+import AICalendarIntegration from './AICalendarIntegration';
 
 interface CalendarScreenProps {
   events: CalendarEvent[];
@@ -70,7 +71,8 @@ export const EventFormModal: React.FC<{
     );
 };
 
-const CalendarScreen: React.FC<CalendarScreenProps> = ({ events, onDeleteEvent, setView, setIsFormOpen }) => {
+const CalendarScreen: React.FC<CalendarScreenProps> = ({ events, onDeleteEvent, onAddEvent, setView, setIsFormOpen }) => {
+    const [showAIAssistant, setShowAIAssistant] = useState(false);
 
     const groupedEvents = useMemo(() => {
         const groups: Record<string, CalendarEvent[]> = {};
