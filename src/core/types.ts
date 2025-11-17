@@ -120,3 +120,18 @@ export interface WhiteboardElement {
   color?: string;
   text?: string;
 }
+
+export interface Workflow {
+  id: string;
+  name: string;
+  description: string;
+  isEnabled: boolean;
+  trigger: {
+    type: 'manual' | 'scheduled' | 'event';
+    schedule?: string;
+  };
+  actions: Array<{
+    type: string;
+    config: Record<string, any>;
+  }>;
+}
