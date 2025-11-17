@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChatUI } from '@/src/shared/components/ChatUI';
+import { ChatInterface } from './components/ChatInterface';
 import type { AiMode, Persona, Message, Settings } from '@/src/core/types';
 
 interface ChatAppProps {
@@ -14,7 +14,7 @@ interface ChatAppProps {
 export const ChatApp: React.FC<ChatAppProps> = (props) => {
   return (
     <div className="h-full w-full">
-      <ChatUI {...props} />
+      <ChatInterface {...props} />
     </div>
   );
 };

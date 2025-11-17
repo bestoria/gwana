@@ -7,16 +7,14 @@ import { Desktop } from './core/shell/Desktop';
 import { Mobile } from './core/shell/Mobile';
 import { WindowManager } from './core/shell/WindowManager';
 import { APP_REGISTRY, getAppById } from './apps/registry';
-import { ChatApp } from './apps/chat/ChatApp';
-import { StudyApp } from './apps/study/StudyApp';
-import { NewsApp } from './apps/news/NewsApp';
-import { SettingsApp } from './apps/settings/SettingsApp';
-import { CalendarApp } from './apps/calendar/CalendarApp';
+import { ChatApp } from './apps/chat';
+import { StudyApp } from './apps/study';
+import { NewsApp } from './apps/news';
+import { SettingsApp } from './apps/settings';
+import { CalendarApp } from './apps/calendar';
+import { DashboardApp } from './apps/dashboard';
 import LoginScreen from './shared/components/LoginScreen';
 import ApiKeyWarning from './shared/components/ApiKeyWarning';
-import DashboardScreen from './shared/components/DashboardScreen';
-import AppDrawer from './shared/components/AppDrawer';
-import SharedContentViewer from './shared/components/SharedContentViewer';
 import DesktopAssistant from './shared/components/DesktopAssistant';
 import { Loader } from 'lucide-react';
 import { audioManager } from './lib/utils';
@@ -165,10 +163,7 @@ const KwararruCore: React.FC<KwararruCoreProps> = ({ currentUser, isSubscribed, 
   // Render main content based on view
   const renderMainContent = () => {
     if (view === 'dashboard') {
-      return <DashboardScreen onNavigate={handleViewChange} />;
-    }
-    if (view === 'appDrawer') {
-      return <AppDrawer apps={APP_REGISTRY} onAppSelect={handleOpenApp} onClose={() => setView('dashboard')} />;
+      return <DashboardApp />;
     }
     if (view === 'chat') {
       return (
@@ -291,14 +286,6 @@ export default function App() {
     }
   }, []);
 
-  // Shared content viewer
-  if (contentToShare) {
-    return (
-      <ErrorBoundary>
-        <SharedContentViewer message={contentToShare} />
-      </ErrorBoundary>
-    );
-  }
 
   // Loading state
   if (isLoading) {
